@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:notes/cubits/cubit/cubit/addnotecubit_cubit.dart';
 import 'package:notes/widget/custem_textfild.dart';
+import 'package:notes/widget/formfield.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class showcutommodelsheet extends StatefulWidget {
   const showcutommodelsheet({super.key});
@@ -9,65 +13,27 @@ class showcutommodelsheet extends StatefulWidget {
 }
 
 class _showcutommodelsheetState extends State<showcutommodelsheet> {
-  String? title, subtitle;
   @override
-      final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.all(16),
-        width: double.infinity,
-        child: Form(
-          key: formKey,
-          autovalidateMode: autovalidateMode,
-          child: Column(
-            children: [
-              custemtextfild(text: 'Title', maxLines: 1,onSaved: (value) {
-                title = value;
-              },),
-              SizedBox(
-                height: 10,
-              ),
-              custemtextfild(
-                text: 'descption',
-                maxLines: 6,
-                onSaved: (value) {
-                  subtitle = value;
-                },
-              ),
-              Container(
-                margin: EdgeInsets.all(10),
-                width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.orange),
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        formKey.currentState!.save();
-                      }
-                      else{
-                        autovalidateMode=AutovalidateMode.always;
-                        setState(() {
-                          
-                        });
-                      }
-                    },
-                    child: Text('Save')),
-              )
-            ],
-          ),
-        ),
+    return Container(
+      padding: EdgeInsets.all(16),
+      width: double.infinity,
+      child: BlocConsumer<AddnotecubitCubit, AddnotecubitState>(
+        listener: (context, state) {
+          if (state is Addnotecubitfalire) {
+            print(state.errorMessage);
+          }
+          if (state is Addnotecubitsuccess) {
+            print('hi222');
+            Navigator.pop(context);
+          }
+        },
+        builder: (context, state) {
+          return ModalProgressHUD(
+              inAsyncCall: state is AddnotecubitLoading ? true : false,
+              child: SingleChildScrollView(child: formfieldnote()));
+        },
       ),
     );
-  }
-
-  InputDecoration border(String text) {
-    return InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: text,
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.green, width: 2),
-        ));
   }
 }

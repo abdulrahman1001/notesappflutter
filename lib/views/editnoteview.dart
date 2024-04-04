@@ -11,10 +11,11 @@ class editnoteview extends StatefulWidget {
 
 class _editnoteviewState extends State<editnoteview> {
   String? title, subtitle;
-  @override
-  Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  @override
+  Widget build(BuildContext context) {
+  
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.all(16.0),
