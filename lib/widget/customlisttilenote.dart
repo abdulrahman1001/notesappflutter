@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes/model/notesmodel.dart';
 import 'package:notes/views/editnoteview.dart';
 
 class customlisttilenote extends StatelessWidget {
-  const customlisttilenote({super.key});
+  const customlisttilenote({super.key, required this.note});
+  final notesmodel note;
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +24,18 @@ class customlisttilenote extends StatelessWidget {
             children: [
               ListTile(
                 title: Text(
-                  "Title",
+                  note.title,
                   style: TextStyle(fontSize: 40),
                 ),
                 subtitle: Text(
-                  "Title222",
+                  note.description,
                   style: TextStyle(fontSize: 20),
                 ),
                 trailing: IconButton(
-                    onPressed: () {}, icon: Icon(FontAwesomeIcons.trash)),
+                    onPressed: () {
+                      note.delete();
+                    },
+                    icon: Icon(FontAwesomeIcons.trash)),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,7 +48,7 @@ class customlisttilenote extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: FittedBox(
                         child: Text(
-                      '21may',
+                      note.date,
                       style: TextStyle(
                           fontSize: 15, color: Colors.black.withOpacity(.4)),
                     )),

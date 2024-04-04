@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes/cubits/cubit/cubit/addnotecubit_cubit.dart';
 import 'package:notes/model/notesmodel.dart';
 import 'package:notes/widget/custem_textfild.dart';
-
+import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class formfieldnote extends StatefulWidget {
@@ -47,13 +47,15 @@ class _formfieldnoteState extends State<formfieldnote> {
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
+                      var format = DateFormat.yMMMMd().format(DateTime.now());
                     formKey.currentState!.save();
                     notesmodel note = notesmodel(
                         color: Colors.blueAccent.value,
                         title: title!,
                         description: subtitle!,
-                        date: DateTime.now().toString());
+                        date: format);
                     BlocProvider.of<AddnotecubitCubit>(context).addnote(note);
+                   
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                     setState(() {});

@@ -16,7 +16,6 @@ class _showcutommodelsheetState extends State<showcutommodelsheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
       width: double.infinity,
       child: BlocConsumer<AddnotecubitCubit, AddnotecubitState>(
         listener: (context, state) {
@@ -31,7 +30,14 @@ class _showcutommodelsheetState extends State<showcutommodelsheet> {
         builder: (context, state) {
           return ModalProgressHUD(
               inAsyncCall: state is AddnotecubitLoading ? true : false,
-              child: SingleChildScrollView(child: formfieldnote()));
+              child: Padding(
+                padding:  EdgeInsets.only(
+                    top: 16,
+                    left: 16,
+                    right: 16,
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: SingleChildScrollView(child: formfieldnote()),
+              ));
         },
       ),
     );
