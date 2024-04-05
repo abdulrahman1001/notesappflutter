@@ -28,37 +28,39 @@ class _editnoteviewState extends State<editnoteview> {
       child: Form(
         autovalidateMode: autovalidateMode,
         key: formKey,
-        child: Column(
-          children: [
-            customappbar(
-              icon: Icons.check,
-              onPressed: () {
-              
-                widget.model.save();
-                    BlocProvider.of<NotecubitCubit>(context).fetshnotes();
-    
-                Navigator.pop(context);
-              },
-            ),
-            custemtextfild(
-              text: 'title',
-              maxLines: 1,
-              onchange: (value) {
-              
-                widget.model.title = value!;
-              },
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            custemtextfild(
-              text: 'description',
-              maxLines: 6,
-              onchange: (value) {
-                widget.model.description = value!;
-              },
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              customappbar(
+                icon: Icons.check,
+                onPressed: () {
+                
+                  widget.model.save();
+                      BlocProvider.of<NotecubitCubit>(context).fetshnotes();
+            
+                  Navigator.pop(context);
+                },
+              ),
+              custemtextfild(
+                text: 'title',
+                maxLines: 1,
+                onchange: (value) {
+                
+                  widget.model.title = value!;
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              custemtextfild(
+                text: 'description',
+                maxLines: 6,
+                onchange: (value) {
+                  widget.model.description = value!;
+                },
+              ),
+            ],
+          ),
         ),
       ),
     ));
