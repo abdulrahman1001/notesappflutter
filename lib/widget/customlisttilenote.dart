@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes/cubits/cubit/cubit/addnotecubit_cubit.dart';
+import 'package:notes/cubits/cubit/notecubit_cubit.dart';
 import 'package:notes/model/notesmodel.dart';
 import 'package:notes/views/editnoteview.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class customlisttilenote extends StatelessWidget {
   const customlisttilenote({super.key, required this.note});
@@ -14,7 +17,7 @@ class customlisttilenote extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => editnoteview()));
+              context, MaterialPageRoute(builder: (context) => editnoteview(model: note,)));
         },
         child: Container(
           decoration: BoxDecoration(
@@ -34,6 +37,7 @@ class customlisttilenote extends StatelessWidget {
                 trailing: IconButton(
                     onPressed: () {
                       note.delete();
+                      BlocProvider.of<NotecubitCubit>(context).fetshnotes();
                     },
                     icon: Icon(FontAwesomeIcons.trash)),
               ),

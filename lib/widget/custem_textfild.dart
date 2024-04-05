@@ -4,13 +4,15 @@ class custemtextfild extends StatelessWidget {
   final String text;
   final int maxLines;
   final void Function(String?)? onSaved;
+    final void Function(String?)? onchange;
   const custemtextfild({
-    super.key, required this.text, required this.maxLines, this.onSaved,
+    super.key, required this.text, required this.maxLines, this.onSaved, this.onchange,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged:  onchange,
       onSaved:   onSaved,
       validator: (value) {
         if (value?.isEmpty??true) {

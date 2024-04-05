@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes/cubits/cubit/cubit/addnotecubit_cubit.dart';
+import 'package:notes/cubits/cubit/notecubit_cubit.dart';
 import 'package:notes/widget/custem_textfild.dart';
 import 'package:notes/widget/formfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +24,9 @@ class _showcutommodelsheetState extends State<showcutommodelsheet> {
             print(state.errorMessage);
           }
           if (state is Addnotecubitsuccess) {
-            print('hi222');
+            
             Navigator.pop(context);
+           BlocProvider.of<NotecubitCubit>(context).fetshnotes();
           }
         },
         builder: (context, state) {

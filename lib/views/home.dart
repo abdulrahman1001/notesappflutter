@@ -27,8 +27,27 @@ class _homepageState extends State<homepage> {
       floatingActionButton: const customflotingACTIONBUTTON(),
       body: Column(
         children: [
-          customappbar(
-            icon: Icons.search,
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Notes",
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+                IconButton(
+                  onPressed: () {
+                    BlocProvider.of<NotecubitCubit>(context).deleteallnotes();
+                       BlocProvider.of<NotecubitCubit>(context).fetshnotes();
+                  
+                 
+                  },
+                  icon: Icon(Icons.delete_forever_outlined),
+                  color: Colors.white.withOpacity(0.5),
+                ),
+              ],
+            ),
           ),
           const noteslistview()
         ],
